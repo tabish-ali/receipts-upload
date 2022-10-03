@@ -33,4 +33,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/delete-receipt', [ReceiptController::class, 'deleteReceipt'])->middleware();
 
     Route::post('/update-profile', [UsersController::class, 'updateProfile'])->middleware();
+
+    Route::get('/get-stats', [ReceiptController::class, 'getStats'])->middleware();
 });

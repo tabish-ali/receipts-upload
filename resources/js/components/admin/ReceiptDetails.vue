@@ -19,6 +19,17 @@
         </div>
         <div class="border-bottom w-100 px-4 py-2">
           <label class="custom-label">
+            <Icon class="icon me-2" icon="mdi:receipt-text-outline" />
+            Amount</label
+          >
+          <span class="ms-4">{{
+            receipt.amount.toLocaleString(undefined, {
+              minimumFractionDigits: 1,
+            })
+          }}</span>
+        </div>
+        <div class="border-bottom w-100 px-4 py-2">
+          <label class="custom-label">
             <Icon class="icon me-2" icon="mdi:account-circle-outline" />
             Username</label
           >

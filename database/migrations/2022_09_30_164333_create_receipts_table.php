@@ -22,6 +22,7 @@ class CreateReceiptsTable extends Migration
             $table->mediumText('receipt');
             $table->string('receipt_id');
             $table->string('status')->default('pending');
+            $table->double('amount')->default(0);
             $table->timestamps();
         });
     }

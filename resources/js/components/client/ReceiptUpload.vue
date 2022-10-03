@@ -74,6 +74,21 @@
         </div>
         <div class="form-group mt-3">
           <label class="custom-label">
+            <Icon icon="mdi:email-fast-outline" class="label-icon" />Amount
+            <b class="text-danger">*</b>
+          </label>
+          <input
+            required
+            v-model="info.amount"
+            min="100"
+            type="number"
+            placeholder="Enter your phone number"
+            class="form-control"
+          />
+          <small class="fw-bold text-primary">Between 100 -- 10,000</small>
+        </div>
+        <div class="form-group mt-3">
+          <label class="custom-label">
             <Icon icon="mdi:receipt-text-outline" class="label-icon" />Receipt
             <b class="text-danger">*</b>
           </label>
@@ -82,6 +97,7 @@
             @change="onChange"
             type="file"
             placeholder="Upload valid receipt."
+            accept=".jpg,.jpeg,.png"
             class="form-control"
           />
           <small class="text-info fw-bold"
@@ -138,6 +154,7 @@ export default {
         username: '',
         email: '',
         phone: '',
+        amount: 0,
         file: '',
       },
       message: {
@@ -163,21 +180,19 @@ export default {
       document.execCommand('Copy')
       textArea.remove()
 
-      this.$swal(
-        'Copied successfully.',
-        'success'
-      )
+      this.$swal('Copied successfully.', 'success')
     },
 
     async upload() {
-      this.loading = true
       if (
         this.info.username &&
         this.info.fullName &&
         this.info.email &&
         this.info.phone &&
+        this.info.amount >= 100 &&
         this.info.file
       ) {
+        this.loading = true
         const config = {
           headers: {
             'content-type': 'multipart/form-data',
@@ -220,6 +235,7 @@ export default {
           })
       } else {
         this.message.text.push('Please complete all required fields.')
+        this.loading = false
       }
     },
   },

@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div>
+      <stats :admin="admin" />
+    </div>
     <div class="d-flex flex-sm-row flex-column py-4">
       <h3 class="fw-bold w-100">Receipts Uploaded by Players</h3>
       <input
@@ -77,8 +80,9 @@
 
 <script>
 import axios from 'axios'
-
+import Stats from './Stats'
 export default {
+  components: { Stats },
   props: ['admin'],
   data() {
     return {

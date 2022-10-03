@@ -30,6 +30,7 @@ class ReceiptController extends Controller
             $upload->receipt = $file_name;
             $upload->receipt_id = random_int(100000, 999999);
             $upload->status = 'pending';
+            $upload->amount = $info->amount;
             $upload->save();
 
             return response()->json([
@@ -102,5 +103,23 @@ class ReceiptController extends Controller
             $receipt = Receipt::find($request->receipt_id);
             return view('receipt_details', ['receipt' => $receipt]);
         }
+    }
+
+    public function getStats(Request $request)
+    {
+        $pending = Receipt::where('status', 'pending')->count();
+        $verified = Receipt::where('status', 'verified')->count();
+        $rejected = Receipt::where('status', 'rejected')->count();
+        $total = Receipt::count();
+        $total_amount = Receipt::sum('amount');
+
+        $stats = [
+            'pending' => $pending,
+            'verified' => $verified,
+            'rejected' => $rejected,
+            'total' => $total,
+            'total_amount' => $total_amount
+        ];
+        return ['stats' => $stats];
     }
 }

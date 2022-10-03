@@ -46,7 +46,13 @@ export default {
   props: ['admin'],
   data() {
     return {
-      stats: {},
+      stats: {
+        pending: 0,
+        verified: 0,
+        rejected: 0,
+        total_amount: 0.0,
+        total: 0,
+      },
     }
   },
   mounted() {

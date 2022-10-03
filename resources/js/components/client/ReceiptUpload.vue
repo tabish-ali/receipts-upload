@@ -225,6 +225,7 @@ export default {
             } else if (response.status === 413) {
               this.message.text.push('file is too big.')
             }
+            this.loading = false
           })
           .catch((e) => {
             e.response.data.errors.file.forEach((msg) => {

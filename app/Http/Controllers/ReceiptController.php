@@ -29,8 +29,10 @@ class ReceiptController extends Controller
 
             $upload->receipt = $file_name;
             $upload->receipt_id = random_int(100000, 999999);
-            $upload->status = 'pending';
+
             $upload->amount = $info->amount;
+            $upload->status = 'pending';
+
             $upload->save();
 
             return response()->json([

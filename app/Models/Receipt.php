@@ -13,6 +13,7 @@ class Receipt extends Model
         'username', 'full_name',
         'email', 'phone',
         'receipt', 'receipt_id',
+        'amount',
         'status'
     ];
 

@@ -37,7 +37,7 @@ class ReceiptController extends Controller
 
             return response()->json([
                 'message' => 'success',
-                'recepit_id' => $upload->receipt_id
+                'receipt_id' => $upload->receipt_id
             ]);
         } else {
             return response()->json(['message' => 'failed']);

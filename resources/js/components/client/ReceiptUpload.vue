@@ -1,20 +1,39 @@
 <template>
-  <div class="d-flex justify-content-center flex-column align-items-center">
-    <div class="py-1 d-flex justify-content-center text-center">
-      <h3 class="fw-bold text-uppercase text-dark">Please enter the details</h3>
-    </div>
-    <div class="mt-2 fw-bold text-success py-2 d-flex align-items-center">
+  <div class="d-flex flex-column align-items-center">
+    <div class="py-1 d-flex justify-content-center align-items-center">
       <img src="/assets/logos/gcash.png" class="me-2" alt="-" />
-      <span class="text-capitalize">Account Name: {{ settings.name }}</span>
-      &nbsp;|&nbsp;
-      <span>Phone Number:&nbsp;</span>
-      <span ref="numberField"> {{ settings.number }}</span>
-      <small
-        @click="copyNumber"
-        type="button"
-        class="text-uppercase text-dark p-1 rounded"
-        >Copy</small
-      >
+      <h3 class="mb-0 fw-bold text-uppercase text-dark">
+        Please enter the details
+      </h3>
+    </div>
+    <div
+      class="my-2 rounded bg-white fw-bold py-2 d-flex justify-content-center shadow-sm border form-div"
+    >
+      <div class="d-flex flex-column px-sm-5 px-2">
+        <span class="text-capitalize text-dark d-flex">
+          <Icon icon="mdi:wallet-outline" class="label-icon me-1" />
+          Account Name:</span
+        >
+        <span class="text-success"> {{ settings.name }}</span>
+      </div>
+      <div class="border"></div>
+      <div class="d-flex flex-column px-sm-5 px-2">
+        <span class="text-dark d-flex">
+          <Icon icon="mdi:cellphone" class="label-icon me-1" />
+          Phone Number:&nbsp;</span
+        >
+        <div class="d-flex">
+          <span class="text-success d-flex" ref="numberField">
+            {{ settings.number }}</span
+          >
+          <small
+            @click="copyNumber"
+            type="button"
+            class="d-flex align-items-center bg-warning ms-1 text-uppercase text-dark px-1 rounded"
+            >Copy</small
+          >
+        </div>
+      </div>
     </div>
     <div
       class="border rounded border-warning border-4 p-4 form-div align-items-center shadow-sm"
@@ -61,7 +80,7 @@
         </div>
         <div class="form-group mt-3">
           <label class="custom-label">
-            <Icon icon="mdi:email-fast-outline" class="label-icon" />Phone
+            <Icon icon="mdi:cellphone" class="label-icon" />Phone
             <b class="text-danger">*</b>
           </label>
           <input
@@ -74,7 +93,7 @@
         </div>
         <div class="form-group mt-3">
           <label class="custom-label">
-            <Icon icon="mdi:email-fast-outline" class="label-icon" />Amount
+            <Icon icon="mdi:cash-plus" class="label-icon" />Amount
             <b class="text-danger">*</b>
           </label>
           <input
@@ -208,7 +227,7 @@ export default {
           .then((response) => {
             this.loading = false
             if (response.data.message === 'success') {
-              let message = `Data and receipt uploaded successfully. Receipt id = ${response.data.recepit_id}`
+              let message = `Data and receipt uploaded successfully. Receipt id = ${response.data.receipt_id}`
               this.message.text.push(message)
               this.message.cls = 'text-success'
               this.info.file = null
@@ -216,6 +235,25 @@ export default {
               this.info.fullName = ''
               this.info.phone = ''
               this.info.email = ''
+
+              this.$swal({
+                title: 'Receipt uploaded successfully',
+                text: `Data and receipt is submited to loader, receipt trasaction no = ${response.data.receipt_id}. You can use it to check your receipt status.`,
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonText: 'Copy',
+                denyButtonText: `Don't save`,
+              }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                  this.textToClipboard(response.data.receipt_id)
+                  this.$swal({
+                    title: `Receipt No ${response.data.receipt_id} is copied.`,
+                    icon: 'success',
+                  })
+                } else if (result.isDenied) {
+                }
+              })
             } else if (response.data.message == 'failed') {
               let message = `Something went wrong.`
               this.message.text.push(message)
@@ -238,6 +276,14 @@ export default {
         this.message.text.push('Please complete all required fields.')
         this.loading = false
       }
+    },
+    textToClipboard(text) {
+      var dummy = document.createElement('textarea')
+      document.body.appendChild(dummy)
+      dummy.value = text
+      dummy.select()
+      document.execCommand('copy')
+      document.body.removeChild(dummy)
     },
   },
 }

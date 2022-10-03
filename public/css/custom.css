@@ -1,0 +1,153 @@
+.custom-label {
+  letter-spacing: 1px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  color: rgb(54, 54, 54);
+}
+
+.button-icon {
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.label-icon {
+  font-size: 25px;
+  margin-right: 5px;
+}
+
+.form-div {
+  position: relative;
+}
+
+body {
+  background-color: rgb(245, 245, 245);
+}
+
+@media (min-width: 576px) {
+  .form-div {
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .form-div {
+    width: 50%;
+  }
+}
+
+@media (min-width: 992px) {
+  .form-div {
+    width: 60%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .form-div {
+    width: 50%;
+  }
+}
+
+@media (min-width: 1400px) {
+  .form-div {
+    width: 40%;
+  }
+}
+
+.sidenav {
+  height: 100%;
+  width: 180px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 14px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.dash-icon {
+  width: 22px;
+  height: 22px;
+  margin-right: 10px;
+}
+
+.icon {
+  font-size: 18px;
+}
+
+.hero-icon{
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.warning-tag {
+  background: rgb(255, 187, 14);
+  color: rgb(153, 130, 0);
+}
+
+.main {
+  margin-left: 180px; /* Same as the width of the sidenav */
+  padding: 0px 5px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav a {
+    font-size: 18px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .sidenav a span {
+    display: none;
+  }
+  .sidenav {
+    width: 50px;
+  }
+  .main {
+    margin-left: 50px;
+  }
+}
+
+thead {
+  font-size: 16px;
+}
+th {
+  font-size: 14px;
+}
+tr td {
+  font-size: 14px;
+}
+
+td {
+  vertical-align: middle;
+  white-space: nowrap;
+  color: #535353 !important;
+}
+th {
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+table {
+  border: 1px solid gray;
+}
